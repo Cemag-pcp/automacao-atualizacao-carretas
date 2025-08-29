@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Automação Atualizar Carretas</h1>
+        <button id="iniciar">Iniciar Processo</button>
+        <div id="mensagem" style="display: none;">
+            <p class="loading">Aguarde a execução da automação...</p>
+        </div>
+    </div>
+
+    <script>
+        const btnIniciar = document.getElementById('iniciar'); 
+
+        btnIniciar.addEventListener('click', function(){
+            btnIniciar.style.display = 'none';
+            const mensagem = document.getElementById('mensagem');
+            mensagem.style.display = 'block';
+            mensagem.querySelector('p').classList.remove('loading');
+            mensagem.querySelector('p').classList.add('loading');
+
+            processarRequisicao();
+        });
+
+        function processarRequisicao() {
+            fetch('/executar/',{
+                method:'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                const mensagem = document.getElementById('mensagem');
+                if (data.status[0] === 'ok') {
+                    mensagem.querySelector('p').classList.remove('loading');
+                    mensagem.querySelector('p').textContent = 'Processamento concluído!';
+                    mensagem.querySelector('p').classList.add('success');
+                }else{
+                    console.log('Erro na requisição:', data.status);
+                    const mensagem = document.getElementById('mensagem');
+                    mensagem.querySelector('p').classList.remove('loading');
+                    mensagem.querySelector('p').textContent = 'Ocorreu um erro no processamento.';
+                    mensagem.querySelector('p').classList.add('error');
+                }
+            })
+            .catch(error => {
+                console.error('Erro na requisição:', error);
+                const mensagem = document.getElementById('mensagem');
+                mensagem.querySelector('p').classList.remove('loading');
+                mensagem.querySelector('p').textContent = 'Ocorreu um erro no processamento.';
+                mensagem.querySelector('p').classList.add('error');
+            });
+        }
+    </script>
+</body>
+</html>
