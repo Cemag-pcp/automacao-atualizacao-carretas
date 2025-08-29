@@ -28,12 +28,12 @@ def executar_auto():
 
 def agendar_atualizacao():
     print('agendar_atualizacao()')
-    schedule.every().day.at("17:16").do(main)
+    schedule.every().day.at("01:00").do(main)
     while True:
         jobs = schedule.get_jobs()  # Retorna a lista de jobs pendentes
         schedule.run_pending()
-        time.sleep(5)
-        if datetime.now().hour == 16 and datetime.now().minute >= 5:
+        time.sleep(300)
+        if datetime.now().hour == 1 and datetime.now().minute >= 10:
             print(jobs)
 
 # Inicia o agendamento em uma thread separada

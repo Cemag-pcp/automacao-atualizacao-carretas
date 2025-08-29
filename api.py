@@ -6,7 +6,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 import time
 import pandas as pd
 from bs4 import BeautifulSoup
-from app import tratar_df_final
+from tratamento_plan import tratar_df_final
 from conectar_planilha import armazenar_base_atualizada_planilha, armazenar_carretas_pe
 from utils import fechar_todas_abas
 from collections import defaultdict
