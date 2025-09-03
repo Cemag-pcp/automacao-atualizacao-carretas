@@ -32,7 +32,7 @@ def agendar_atualizacao():
     while True:
         jobs = schedule.get_jobs()  # Retorna a lista de jobs pendentes
         schedule.run_pending()
-        time.sleep(300)
+        time.sleep(30)
         if datetime.now().hour == 1 and datetime.now().minute >= 10:
             print(jobs)
 

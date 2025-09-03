@@ -11,6 +11,7 @@ from conectar_planilha import armazenar_base_atualizada_planilha, armazenar_carr
 from utils import fechar_todas_abas
 from collections import defaultdict
 import random
+from verificar_chrome import *
 
 
 
@@ -387,6 +388,7 @@ def main():
     # input('teste')
     # busca_carretas = lista_completa_produtos[:100]
     #Explodindo as carretas de 100 em 100 e concatenando-as
+    chrome_driver_path = verificar_chrome_driver() # Verificação do driver do chrome
     df_final = rodar_automacao(lista_sem_duplicadas_chaves_bom)
 
     fim = time.time()
