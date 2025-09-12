@@ -10,7 +10,7 @@ def configuracoes_iniciais():
             "https://www.googleapis.com/auth/drive"]
     
 
-    credentials = service_account.Credentials.from_service_account_file('credentials.json', scopes=scope)
+    credentials = service_account.Credentials.from_service_account_file(r'C:\Users\Engine\robo_atualizacao_carretas\automacao-atualizacao-carretas\credentials.json', scopes=scope)
 
     client = gspread.authorize(credentials)
     
@@ -44,7 +44,7 @@ def conectar_planilha_apontamento():
         itens_montagem['Célula'].notna() & (itens_montagem['Célula'] != '') &
         itens_montagem['Código'].notna() & (itens_montagem['Código'] != '')
     ]
-    df_celuas_codigo_atualizados = itens_montagem.groupby(['Código','Célula'],as_index=False).first().reset_index()
+    df_celuas_codigo_atualizados = itens_montagem.groupby(['Código'],as_index=False).last().reset_index()
 
     return df_celuas_codigo_atualizados
 

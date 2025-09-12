@@ -76,7 +76,11 @@ def rodar_automacao(carretas):
     # Inicializa o navegador
     lista_df = []
     while len(carretas) > 0:
-        driver = webdriver.Chrome()
+        try:
+            driver = webdriver.Chrome()
+        except:
+            chrome_driver_path = verificar_chrome_driver()
+            driver = webdriver.Chrome(chrome_driver_path)
 
         # Acessa o sistema
         driver.get("http://192.168.3.141/sistema")
@@ -388,7 +392,6 @@ def main():
     # input('teste')
     # busca_carretas = lista_completa_produtos[:100]
     #Explodindo as carretas de 100 em 100 e concatenando-as
-    chrome_driver_path = verificar_chrome_driver() # Verificação do driver do chrome
     df_final = rodar_automacao(lista_sem_duplicadas_chaves_bom)
 
     fim = time.time()
@@ -397,7 +400,7 @@ def main():
     duracao_minutos = duracao_segundos / 60
 
     # Salvar o que veio do innovaro
-    df_final.to_excel(r"C:\Users\TIDEV\Documents\planilhas_auxiliares\resultado_innovaro.xlsx", index=False)
+    df_final.to_excel(r"C:\Users\Engine\planilhas_auxiliares\resultado_innovaro.xlsx", index=False)
     #Tratamento da planilha
     df_tratado = tratar_df_final(df_final)
 
@@ -409,7 +412,7 @@ def main():
     print(f"Tempo de execução da explosão das carretas: {duracao_minutos:.2f} minutos")
 
     # Salvar o que veio do innovaro
-    df_final_pe.to_excel(r"C:\Users\TIDEV\Documents\planilhas_auxiliares\resultado_innovaro_pe.xlsx", index=False)
+    df_final_pe.to_excel(r"C:\Users\Engine\planilhas_auxiliares\resultado_innovaro_pe.xlsx", index=False)
     #Tratamento da planilha
     df_tratado_pe = tratar_df_final(df_final_pe)
 

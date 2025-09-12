@@ -54,4 +54,4 @@ init_agendamento()
 
 # Executando a aplicação
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

@@ -300,7 +300,6 @@ def tratar_df_final(df):
 
     merge_base_final_celulas['CARRETA TRATADA'] = ""
 
-
     print("15")
 
 
@@ -308,7 +307,7 @@ def tratar_df_final(df):
     merge_base_final_celulas = merge_base_final_celulas[['CELULA 1','CELULA 2','CELULA 3','CODIGO','DESCRIÇÃO','MATÉRIA PRIMA','TOTAL','CONJUNTO','PRIMEIRO PROCESSO','2 PROCESSO','PESO','PRODUTO','CARRETA','CARRETA TRATADA','peça + carreta']]
     # merge_base_final_celulas = merge_base_final_celulas.astype(str)
 
-    merge_base_final_celulas.to_excel(r"C:\Users\TIDEV\Documents\planilhas_auxiliares\carretas_final.xlsx", index=False)
+    merge_base_final_celulas.to_excel(r"C:\Users\Engine\planilhas_auxiliares\carretas_final.xlsx", index=False)
     # merge_base_final_celulas.to_excel(r"C:\Users\TIDEV\Documents\planilhas_auxiliares\carretas_teste.xlsx", index=False)
     print(merge_base_final_celulas)
 
