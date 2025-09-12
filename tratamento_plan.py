@@ -267,9 +267,9 @@ def tratar_df_final(df):
     )
 
     # Filtros para excluir "CODIGO" (coluna L)
-    filtro_excluir_codigo = ~df['CODIGO'].str.startswith(
-        ('11', '13', '120', '126', 'S'),
-        na=False
+    filtro_excluir_codigo = ~(
+        df['CODIGO'].str.startswith(('11', '13', '120', '126', 'S'), na=False)
+        & ~df['CODIGO'].str.startswith('116', na=False)
     )
 
     # Aplicando os dois filtros
