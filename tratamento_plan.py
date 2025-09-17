@@ -261,9 +261,12 @@ def tratar_df_final(df):
     df = df.fillna("")
 
     # Filtros de "PRIMEIRO PROCESSO" (coluna I)
-    filtro_processo = df['PRIMEIRO PROCESSO'].str.startswith(
-        ('CORTAR', 'SERRAR', 'MONTAR', 'PINTAR', 'C USINAR','SECUNDÁRIOS','COMPONENTES'),
-        na=False
+    filtro_processo = (
+        df['CODIGO'].str.startswith('116', na=False) |
+        df['PRIMEIRO PROCESSO'].str.startswith(
+            ('CORTAR', 'SERRAR', 'MONTAR', 'PINTAR', 'C USINAR', 'SECUNDÁRIOS', 'COMPONENTES'),
+            na=False
+        )
     )
 
     # Filtros para excluir "CODIGO" (coluna L)

@@ -41,7 +41,7 @@ def puxando_carretas():
     for produto in dados['produtos']:
         # carretas_totais.append(str(produto.get('codigo')).strip())
         # if (produto.get('cor') == 'Laranja' or produto.get('cor') == '') and "fora de linha" not in produto.get('nome').lower():
-        if "fora de linha" not in produto.get('nome').lower() and "+" not in produto.get('codigo'):
+        if "fora de linha" not in produto.get('nome').lower() and "fora de linha" not in produto.get('codigo').lower() and "+" not in produto.get('codigo'):
             cor_codigo_numerico = str(produto.get('codigo'))[-2:]
 
             try:
