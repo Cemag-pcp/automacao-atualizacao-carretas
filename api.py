@@ -294,7 +294,6 @@ def rodar_automacao(carretas):
 
     return df_final
 
-
 def main():
 
     inicio = time.time()
@@ -375,21 +374,33 @@ def main():
     lista_set_sem_pe = [x for x in lista_set if x not in lista_elementos_diferentes_pe]
 
 
-
     lista_pesquisa_bom_chaves = []
+    lista_pesquisa_bom_chaves_pe = []
+    # lista de codigos e chaves para adicionar ao dataframe
+    lista_completa_chaves_codigos = []
+
 
     for item in carretas_base_completo:
         if item['codigo'] in lista_set_sem_pe:
             lista_pesquisa_bom_chaves.append(item['chave'])
+        if item['codigo'] in lista_elementos_diferentes_pe:
+            lista_pesquisa_bom_chaves_pe.append(item['chave'])
+        if item['codigo'] in lista_set_sem_pe or item['codigo'] in lista_elementos_diferentes_pe:
+            lista_completa_chaves_codigos.append({
+                    'codigo': item['codigo'], 
+                    'chave': item['chave']
+                })
+
+    print(lista_completa_chaves_codigos)
 
     print(len(lista_pesquisa_bom_chaves))
     print(len(list(set(lista_pesquisa_bom_chaves))))
 
     lista_sem_duplicadas_chaves_bom = list(set(lista_pesquisa_bom_chaves))
 
+    # return 'oi'
     #verificar tudo oq em carretas_com_cores que tenha o mesmo sufixo de codigo_carretas
 
-    # input('teste')
     # busca_carretas = lista_completa_produtos[:100]
     #Explodindo as carretas de 100 em 100 e concatenando-as
     df_final = rodar_automacao(lista_sem_duplicadas_chaves_bom)
@@ -404,10 +415,14 @@ def main():
     #Tratamento da planilha
     df_tratado = tratar_df_final(df_final)
 
-    armazenar_base_atualizada_planilha(df_tratado)
+    dataframe_chaves_codigos = pd.DataFrame(lista_completa_chaves_codigos)
+
+    df_combinado_normal = pd.merge(df_tratado, dataframe_chaves_codigos, left='CARRETA', right='codigo', how='left')
+
+    armazenar_base_atualizada_planilha(df_combinado_normal)
 
     # Rodando carretas com PE
-    df_final_pe = rodar_automacao(lista_elementos_diferentes_pe)
+    df_final_pe = rodar_automacao(lista_pesquisa_bom_chaves_pe)
 
     print(f"Tempo de execução da explosão das carretas: {duracao_minutos:.2f} minutos")
 
@@ -416,7 +431,9 @@ def main():
     #Tratamento da planilha
     df_tratado_pe = tratar_df_final(df_final_pe)
 
-    armazenar_carretas_pe(df_tratado_pe)
+    df_combinado_pe = pd.merge(df_tratado_pe, dataframe_chaves_codigos, left='CARRETA', right='codigo', how='left')
+
+    armazenar_carretas_pe(df_combinado_pe)
 
     fim_total = time.time()
 
