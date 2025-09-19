@@ -417,7 +417,7 @@ def main():
 
     dataframe_chaves_codigos = pd.DataFrame(lista_completa_chaves_codigos)
 
-    df_combinado_normal = pd.merge(df_tratado, dataframe_chaves_codigos, left='CARRETA', right='codigo', how='left')
+    df_combinado_normal = pd.merge(df_tratado, dataframe_chaves_codigos, left_on='CARRETA', right_on='codigo', how='left')
 
     armazenar_base_atualizada_planilha(df_combinado_normal)
 
@@ -431,7 +431,7 @@ def main():
     #Tratamento da planilha
     df_tratado_pe = tratar_df_final(df_final_pe)
 
-    df_combinado_pe = pd.merge(df_tratado_pe, dataframe_chaves_codigos, left='CARRETA', right='codigo', how='left')
+    df_combinado_pe = pd.merge(df_tratado_pe, dataframe_chaves_codigos, left_on='CARRETA', right_on='codigo', how='left')
 
     armazenar_carretas_pe(df_combinado_pe)
 
