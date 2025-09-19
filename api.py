@@ -403,6 +403,7 @@ def main():
 
     # busca_carretas = lista_completa_produtos[:100]
     #Explodindo as carretas de 100 em 100 e concatenando-as
+    # lista_sem_duplicadas_chaves_bom = ['79051673']
     df_final = rodar_automacao(lista_sem_duplicadas_chaves_bom)
 
     fim = time.time()
@@ -412,6 +413,7 @@ def main():
 
     # Salvar o que veio do innovaro
     df_final.to_excel(r"C:\Users\Engine\planilhas_auxiliares\resultado_innovaro.xlsx", index=False)
+    # df_final.to_excel(r"C:\Users\TIDEV\planilha_atualizacao_carretas\resultado_innovaro.xlsx", index=False)
     #Tratamento da planilha
     df_tratado = tratar_df_final(df_final)
 
