@@ -10,8 +10,8 @@ def configuracoes_iniciais():
             "https://www.googleapis.com/auth/drive"]
     
 
-    credentials = service_account.Credentials.from_service_account_file(r'C:\Users\Engine\robo_atualizacao_carretas\automacao-atualizacao-carretas\credentials.json', scopes=scope)
-    # credentials = service_account.Credentials.from_service_account_file(r'C:\Users\TIDEV\planilha_atualizacao_carretas\credentials.json', scopes=scope)
+    # credentials = service_account.Credentials.from_service_account_file(r'C:\Users\Engine\robo_atualizacao_carretas\automacao-atualizacao-carretas\credentials.json', scopes=scope)
+    credentials = service_account.Credentials.from_service_account_file(r'C:\Users\TIDEV\planilha_atualizacao_carretas\credentials.json', scopes=scope)
     client = gspread.authorize(credentials)
     
     return client
@@ -95,6 +95,36 @@ def armazenar_carretas_pe(df):
     worksheet.insert_rows(df.values.tolist(), row=ultima_linha+1)
 
     print("BASE ATUALIZADA COM SUCESSO!")
+
+def puxar_pecas_aba():
+    """Puxa a aba de BASE PEÇAS da planilha final e cola na aba BASE ATUALIZADA"""
+    client = configuracoes_iniciais()
+
+    sheet_id = "1A67y-gk0P5qW_jDaxL4B9I-wP9wDM6mjJ91BMrzGWHw"
+
+    sh_base_conjuntos = client.open_by_key(sheet_id)
+
+    # ABA BASE ATUALIZADA
+    worksheet_base_final = sh_base_conjuntos.worksheet("BASE ATUALIZADA")
+
+    # 4. Encontrar a última linha preenchida
+    ultima_linha_base_final = len(worksheet_base_final.get_all_values())
+
+    # Selecionar a aba peças
+    worksheet_pecas = sh_base_conjuntos.worksheet("BASE PEÇAS")
+
+    df_pecas = pd.DataFrame(worksheet_pecas.get_all_values())
+    df_pecas.columns = df_pecas.iloc[0]
+    df_pecas = df_pecas.drop(index=0)
+    df_pecas = df_pecas.fillna("")
+
+    print(df_pecas)
+
+    # Inserir DataFrame a partir da próxima linha
+    worksheet_base_final.insert_rows(df_pecas.values.tolist(), row=ultima_linha_base_final+1)
+
+    print("PEÇAS INSERIDAS COM SUCESSO!")
+
 
 def base_felipe():
     """

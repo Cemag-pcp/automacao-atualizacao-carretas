@@ -7,10 +7,11 @@ import time
 import pandas as pd
 from bs4 import BeautifulSoup
 from tratamento_plan import tratar_df_final
-from conectar_planilha import armazenar_base_atualizada_planilha, armazenar_carretas_pe
+from conectar_planilha import armazenar_base_atualizada_planilha, armazenar_carretas_pe, puxar_pecas_aba
 from utils import fechar_todas_abas
 from collections import defaultdict
 import random
+import re
 from verificar_chrome import *
 
 
@@ -387,7 +388,7 @@ def main():
             lista_pesquisa_bom_chaves_pe.append(item['chave'])
         if item['codigo'] in lista_set_sem_pe or item['codigo'] in lista_elementos_diferentes_pe:
             lista_completa_chaves_codigos.append({
-                    'codigo': item['codigo'], 
+                    'codigo': re.sub(r"(LC|LH|VM|VJ|AN|AV)$", "", item['codigo']).strip(), 
                     'chave': item['chave']
                 })
 
@@ -436,6 +437,9 @@ def main():
     df_combinado_pe = pd.merge(df_tratado_pe, dataframe_chaves_codigos, left_on='CARRETA', right_on='codigo', how='left')
 
     armazenar_carretas_pe(df_combinado_pe)
+
+    # Puxando as peças da aba BASE PEÇAS e colando na aba BASE ATUALIZADA
+    puxar_pecas_aba()
 
     fim_total = time.time()
 
