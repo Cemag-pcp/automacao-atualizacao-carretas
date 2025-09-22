@@ -19,9 +19,9 @@ def login(nav):
     try:
         # logando
         WebDriverWait(nav, 10).until(EC.element_to_be_clickable(
-            (By.XPATH, '//*[@id="username"]'))).send_keys("ti.dev")
+            (By.XPATH, '//*[@id="username"]'))).send_keys("Luan Araujo")
         WebDriverWait(nav, 10).until(EC.element_to_be_clickable(
-            (By.XPATH, '//*[@id="password"]'))).send_keys("cem@1616") #cem@1616
+            (By.XPATH, '//*[@id="password"]'))).send_keys("luanaraujo7") #cem@1616
         WebDriverWait(nav, 10).until(EC.element_to_be_clickable(
             (By.XPATH, '//*[@id="password"]'))).send_keys(Keys.ENTER)#Cemag@15
 
