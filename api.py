@@ -90,8 +90,8 @@ def rodar_automacao(carretas):
         time.sleep(2)
 
         # Faz login
-        driver.find_element(By.ID, "username").send_keys("FILIPE")
-        driver.find_element(By.ID, "password").send_keys("3470Filipe13")
+        driver.find_element(By.ID, "username").send_keys("Luan Araujo")
+        driver.find_element(By.ID, "password").send_keys("luanaraujo7")
         # driver.find_element(By.ID, "username").send_keys("ti.prod")
         # driver.find_element(By.ID, "password").send_keys("cem@1610")
         driver.find_element(By.ID, "submit-login").click()
