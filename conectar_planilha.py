@@ -10,8 +10,8 @@ def configuracoes_iniciais():
             "https://www.googleapis.com/auth/drive"]
     
 
-    # credentials = service_account.Credentials.from_service_account_file(r'C:\Users\Engine\robo_atualizacao_carretas\automacao-atualizacao-carretas\credentials.json', scopes=scope)
-    credentials = service_account.Credentials.from_service_account_file(r'C:\Users\TIDEV\planilha_atualizacao_carretas\credentials.json', scopes=scope)
+    credentials = service_account.Credentials.from_service_account_file(r'C:\Users\Engine\robo_atualizacao_carretas\automacao-atualizacao-carretas\credentials.json', scopes=scope)
+    # credentials = service_account.Credentials.from_service_account_file(r'C:\Users\TIDEV\planilha_atualizacao_carretas\credentials.json', scopes=scope)
     client = gspread.authorize(credentials)
     
     return client
