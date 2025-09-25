@@ -51,6 +51,8 @@ def classificar_codigo(codigo, valor_atual):
         return 'COMPONENTES'
     elif codigo_str.startswith('3'):
         return 'SECUNDÁRIOS'
+    elif codigo_str.startswith('116'):
+        return 'COMP. NAVAL'
     else:
         return valor_atual
     
