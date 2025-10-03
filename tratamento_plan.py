@@ -17,7 +17,9 @@ def contar_pontos_inicio(valor):
 def limpar_espacos_unicode(texto):
     if pd.isnull(texto):
         return texto
-    texto = texto.replace(".", "")
+    numero_pontos = contar_pontos_inicio(texto)
+    # Remove apenas os pontos do início
+    texto = texto.replace(".", "",numero_pontos)
     # Remove todos os espaços unicode no começo e fim
     return re.sub(r"^\s+|\s+$", "", texto)
 
