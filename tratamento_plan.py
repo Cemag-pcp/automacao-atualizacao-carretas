@@ -38,6 +38,7 @@ def definir_primeiro_processo(texto):
         ('S C Laser', 'CORTAR'),
         ('S Usinagem', 'C USINAR'),
         ('S Mont Sistemas Carretas', 'MONTAR'),
+        ('S Cx Acessórios - P Setor Cx Acessórios', 'CX'),
     ]
 
     if pd.isnull(texto):
