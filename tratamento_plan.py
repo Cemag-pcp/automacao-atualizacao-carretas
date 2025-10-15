@@ -270,7 +270,7 @@ def tratar_df_final(df):
     filtro_processo = (
         df['CODIGO'].str.startswith('116', na=False) |
         df['PRIMEIRO PROCESSO'].str.startswith(
-            ('CORTAR', 'SERRAR', 'MONTAR', 'PINTAR', 'C USINAR', 'SECUNDÁRIOS', 'COMPONENTES'),
+            ('CORTAR', 'SERRAR', 'MONTAR', 'PINTAR', 'C USINAR', 'SECUNDÁRIOS', 'COMPONENTES', 'CX'),
             na=False
         )
     )
