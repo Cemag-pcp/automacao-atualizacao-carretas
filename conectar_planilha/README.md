@@ -1,4 +1,4 @@
-# Documentação do Arquivo de Manipulação de Planilhas de Carretas (conextar_planilha.py)
+# Documentação do Arquivo de Manipulação de Planilhas de Carretas (conectar_planilha.py)
 
 ## Objetivo
 Este arquivo é responsável por gerenciar dados de planilhas relacionadas a carretas, incluindo a extração de informações, atualização de bases e integração de diferentes abas dentro de uma mesma planilha.
