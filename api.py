@@ -17,10 +17,6 @@ from verificar_chrome import *
 
 
 def puxando_carretas():
-    # lista = ['77997944', 'CBH7-2E FO SS RS/T M24', '66826075', '84494370', '77182604', '78542451', '80415918', '79382990', '75712112', '032513', '82169949', '95673995', '90338803', 'CBHM5000 GR CS RD P650(R) M17', '81557346', 'CBH5 FO SC RD MM P750(I) M21', '83311673', '71361057', '75238296', 'FTC4300R-1E SS RD BB M24', '77645951', 'FTC6500-1E SS T BB P750(I) M22', '91487379', '84914709', 'CBHM3500 SC RD BE M17', 'FTC6500-1E SS T R20 BB M22', '77978081', '58561424', '75445188', '90866402', '93252310', 'FTC4300R-1E CS RD P750(I) M24', '88991624', '76262608', '94246796', 'CBHM3500 SS RS P750(R) M17', '030383', 'FA4 FB SS RS A90 M22', '96725973', '402795', 'FTC6500 CS RS/RS M22', 'FTD5000 SS T M22', 'CBH5 FO SS RD MM P750(I) M21', '75451478', 'CBHM5000 GR SC RD P650(R) M17', 'FA5 SS T M23', '83004134', 'CBH5 UG SC T M21', '75464267', '78243844', 'FA2A SS T M23', '75438833', 'FTC4300R SS RS/RS BB M24', 'CBH6R FO SC T P750(R) M21', 'CBHM5000 GR SC RD MM P750(R) M17', 'FTC4300R-1E SS RD BB P750(I) M24', 'CBH6 FO SS RD MM P750(I) M22', '78185870', '81473731', 'CBHM5000 GR SS RD BE M17', 'CBH5 UG SS T P700(R) M21', 'CHASSI FTC4300 SS M22', 'CBHM5000 GR CS RD P750(I) M17', 'FA4 SS RS A90 P750(I) M23', 'CBHM5000 GR SC RD BE M17', '93253429', '81589725', 'CBHM6000 UG SS RD M17', '030378', '94047858', 'CBH7 FO SS T MM P700(R) M21', 'FTC6500 SS RS/RS P750(I) M22', '81358950', '94246581', '84753591', 'F4 SS RS/RS A90 CB M23', 'CBHM5000 CA SC RD ABA MM M17', '75509234', '88561046', '93306979', 'CBH6R FO SC RD TTUG P750(I) M21', '77183194', 'CHASSI FTC4300-1E SS T BB M22', '91487397', '622309M25', 'CBH5 FO SC T MM M21', 'CBH7 FO SS T MM M21', '84798396', 'FTC4300R-1E SS T M24', '95930536', '76037344', 'FTC6500 SS RS/RS BB P750(I) M22+', '79397053', 'F6 SS RS/RS A60 MT M22', '93923931', '036860', 'CBH6 FO SS RDC P750(I) M22', 'CBHM6000-2E SS RS/RD P750(I) M17', '86195534', 'CBHM4500 SS RD P650(R) M17']
-
-    # print(len(lista))
-    
     link = "https://cemag.innovaro.com.br/api/publica/v1/tabelas/listarProdutos"
 
     response = requests.get(link)
@@ -239,13 +235,6 @@ def rodar_automacao(carretas):
         # Extrai as linhas da tabela localizada em //*[@id="lid-0"]/tbody
         # linhas = driver.find_elements(By.XPATH, '//*[@id="lid-0"]/tbody/tr')
 
-        # print('Percorrendo linhas...')
-        # dados = []
-        # for linha in linhas:
-        #     colunas = linha.find_elements(By.TAG_NAME, 'td')
-        #     if colunas:
-        #         dados.append([coluna.text.strip() for coluna in colunas])
-
         
 
         # 1. Extrai o HTML da tabela de uma vez
@@ -302,7 +291,6 @@ def main():
     #Pegando as carretas atualizadas da api
     codigo_carretas, carretas_com_cores, carretas_base_completo = puxando_carretas()
 
-    # print(codigo_carretas)
 
     # Valores que já existem nos codigos sem cor
     resultado = {}
@@ -357,7 +345,6 @@ def main():
         item_sorteado = random.choice(itens)
         sorteados.append(item_sorteado)
 
-    # print(sorteados)
     lista_completa_produtos = codigo_carretas + sorteados
 
     lista_set = set(lista_completa_produtos)
@@ -399,12 +386,9 @@ def main():
 
     lista_sem_duplicadas_chaves_bom = list(set(lista_pesquisa_bom_chaves))
 
-    # return 'oi'
     #verificar tudo oq em carretas_com_cores que tenha o mesmo sufixo de codigo_carretas
 
-    # busca_carretas = lista_completa_produtos[:100]
     #Explodindo as carretas de 100 em 100 e concatenando-as
-    # lista_sem_duplicadas_chaves_bom = ['79051673']
     df_final = rodar_automacao(lista_sem_duplicadas_chaves_bom)
 
     fim = time.time()
