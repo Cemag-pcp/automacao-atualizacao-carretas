@@ -108,7 +108,7 @@ def puxar_pecas_aba():
     worksheet_base_final = sh_base_conjuntos.worksheet("BASE ATUALIZADA")
 
     # 4. Encontrar a última linha preenchida
-    ultima_linha_base_final = len(worksheet_base_final.get_all_values())
+    ultima_linha_base_final = len(worksheet_base_final.col_values(4)) # pegando a coluna codigo
 
     # Selecionar a aba peças
     worksheet_pecas = sh_base_conjuntos.worksheet("BASE PEÇAS")
@@ -153,6 +153,3 @@ def base_felipe():
     print(len(carretas))
 
     return carretas
-
-# armazenar_base_atualizada_planilha()
-# armazenar_carretas_pe()
